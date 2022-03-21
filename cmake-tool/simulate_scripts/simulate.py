@@ -49,7 +49,7 @@ def parse_args():
 def notice(message):
     # Don't call this without initialising `progname`.
     assert(progname)
-    print("{}: {}".format(progname, message), file=sys.stderr)
+    print("{}: {}".format(progname, message), file=sys.stderr, flush=True)
 
 if __name__ == "__main__":
     args = parse_args()
@@ -81,11 +81,11 @@ if __name__ == "__main__":
     qemu_simulate_command = " ".join(qemu_simulate_command_opts)
 
     if qemu_gdbserver_command != "":
-        print(f'GDB command: {qemu_gdbserver_command}', file=sys.stderr)
+        print(f'GDB command: {qemu_gdbserver_command}', file=sys.stderr, flush=True)
         if not args.dry_run:
             notice('waiting for GDB on port 1234...')
 
-    print(f'QEMU command: {qemu_simulate_command}', file=sys.stderr)
+    print(f'QEMU command: {qemu_simulate_command}', file=sys.stderr, flush=True)
     if not args.dry_run:
         qemu_status = subprocess.call(qemu_simulate_command, shell=True)
 
